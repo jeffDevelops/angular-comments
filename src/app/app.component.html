@@ -1,0 +1,26 @@
+<h1>Comments</h1>
+<ul>
+    <li *ngFor="let comment of comments">
+    <span contenteditable="true"
+    	([ngModel])="comment.author" 
+    	(keyup.enter)="editDetails(comment.id, comment.author, comment.text)" 
+    	class="author">
+    	{{comment.author}}
+    </span>
+    <span contenteditable="true"
+    	([ngModel])="comment.text"
+    	(keyup.enter)="editDetails(comment.id, comment.author, comment.text)"
+    	class="text">
+    	{{comment.text}}
+    </span>
+    <div (click)="deleteComment(comment.id)" class="delete">
+    	<h4>Delete</h4>
+    </div>
+    </li>
+</ul>
+<form #commentForm="ngForm" (ngSubmit)="addComment(commentForm)">
+	<h4>Post a Comment</h4>
+	<input type="text" class="text-input" placeholder="Comment" name="text" ngModel/>
+	<input type="text" class="author-input" placeholder="Author" name="author" ngModel/>
+	<input type="submit">
+</form>
